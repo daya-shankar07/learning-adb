@@ -59,3 +59,11 @@ val test = splits(1) cache
 
 // COMMAND ----------
 
+val algorithm = new LinearRegressionWithSGD()
+val model = algorithm run training
+val prediction = model predict(test map(_ features))
+val predictionAndLabel = prediction zip(test map(_ label))
+
+// COMMAND ----------
+
+predictionAndLabel.foreach((result) => println(s"predicted label: ${result._1}, actual label: ${result._2}"))
